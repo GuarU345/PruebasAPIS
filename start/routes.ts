@@ -26,7 +26,12 @@ Route.post('login','UsuariosController.login')
 
 Route.post('registrarprod','ProductosController.crearProducto')
 Route.get('consultaprod','ProductosController.consultaProducto')
+Route.get('consultapok','ProductosController.consulta')
+Route.get('10pok','ProductosController.paginacion')
+
 
 Route.post('consultadatos','ProductosController.consultaRegistro')
 Route.post('filtro','ProductosController.filtrado')
 Route.post('filtrocom','ProductosController.filtrarcomida')
+
+Route.delete('eliminarpok','ProductosController.eliminarPokemon')

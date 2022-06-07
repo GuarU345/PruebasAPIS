@@ -31,13 +31,27 @@ export default class ProductosController {
         console.log("datos insertados correctamente")
       })
     }
+    public async eliminarPokemon({request}){
+      const pokemon=request.input('name')
+      const consulta=await Database.from('pokemon').delete('*').where('nom_pokemon','=',pokemon)
+      const mensaje="pokemon eliminado correctamente"
+      return mensaje
+    }
     public async filtrado({request}: HttpContextContract){
         const buscar=request.input('name')
-        const consulta=await Database.from('pokemon').select('*').where('name', 'LIKE' ,'%' + buscar + '%')
+        const consulta=await Database.from('pokemon').select('*').where('nom_pokemon', 'LIKE' ,'%' + buscar + '%')
         return consulta
     }
+    public async paginacion(){
+      const consulta=Database.rawQuery('select* from pokemon order by(id)DESC limit 10')
+      return consulta
+    }
+    public async consulta(){
+      const consulta=await Database.from('pokemon').select('*').where('nom_pokemon', '=' ,'mewtwo')
+      return consulta
+    }
     public async filtrarcomida({request}:HttpContextContract){
-       const nom_producto=request.input('nom_producto')
+       const nom_producto=request.input('producto')
        const consulta=await Database.from('productos').select('*').where('nom_producto', 'LIKE' ,'%' + nom_producto + '%')
        return consulta
     }
